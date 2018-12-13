@@ -3,7 +3,7 @@
 ```bash
 #下载kobuki
 git clone https://github.com/yujinrobot/kobuki.git
-###############################################################################
+
 #安装依赖
 sudo apt-get install ros-kinetic-ecl-exceptions
 sudo apt-get install ros-kinetic-ecl-threads
@@ -13,8 +13,6 @@ sudo apt-get install ros-kinetic-ecl-geometry
 sudo apt-get install ros-kinetic-kobuki-dock-drive
 sudo apt-get install ros-kinetic-kobuki-driver
 sudo apt-get install ros-kinetic-ecl-streams
-###############################################################################
-###############################要安装的#######################################
 sudo apt-get install ros-kinetic-realsense-camera
 sudo apt-get install ros-kinetic-librealsense
 sudo apt-get install linux-headers-generic
@@ -46,7 +44,7 @@ ros-kinetic-turtlebot-rapps
 
 ##### kobuki底盘控制
 ###### 键盘控制
-```
+```bash
 roslaunch kobuki_node minimal.launch --screen
 
 roslaunch kobuki_keyop keyop.launch --screen
@@ -105,7 +103,7 @@ roslaunch turtlebot_teleop logitech.launch
 
 #### turtlebot2仿真模型的加载
 1.turtlebot2仿真模型的加载 
-```
+```bash
 roslaunch turtlebot_gazebo turtlebot_world.launch
 
 roslaunch turtlebot_teleop logitech.launch
@@ -117,7 +115,6 @@ roslaunch turtlebot_teleop logitech.launch
 链接:[ubuntu16.04安装kinect驱动](https://www.gjxslisa.club/2018/07/18/Kinect-driver/)
 
 ```bash
-
 sudo apt-get install nvidia-opencl-dev nvidia-modprobe nvidia-libopencl1-384 nvidia-opencl-icd-384
 
 sudo apt-get install nvidia-cuda-toolkit
@@ -181,7 +178,6 @@ roslaunch turtlebot_bringup minimal.launch
 roslaunch turtlebot_slam kinect2_gmapping.launch
 roslaunch turtlebot_slam kinect2_gmapping_rviz_view.launch
 roslaunch turtlebot_teleop logitech.launch
-
 ```
 
 保存地图
@@ -193,7 +189,6 @@ rosrun map_server map_saver -f mymap
 ```bash
 roslaunch turtlebot_navigation amcl_demo.launch map_file:=/path/my_map.yaml
 ```
-
 
 ### 方法2turtlebot_k2_exploration_3d
 安装依赖 
@@ -218,7 +213,6 @@ roslaunch turtlebot_exploration_3d exploration_rviz.launch
 源码:[turtlebot2_roam](https://github.com/QinZiwen/turtlebot2_roam)
 
 网站:[RTAB-Map](http://introlab.github.io/rtabmap/)
-
 
 ### 问题解决
 问题1:出现未定义应用
@@ -257,13 +251,11 @@ roslaunch kinect2_bridge kinect2_bridge.launch
 rosrun kinect2_viewer kinect2_viewer
 ```
 
-
 问题4:ERROR: cannot launch node of type [base_controller/base_controller]: base_controller
 ```bash
 
 
 ```
-
 
 ## 激光雷达
 安装激光雷达功能包(A2,A3)
@@ -288,7 +280,7 @@ sudo touch 57-kobuki.rules && sudo gedit 57-kobuki.rules
 ```
 
 内容如下:
-```
+```bash
 # On precise, for some reason, USER and GROUP are getting ignored.
 # So setting mode = 0666 for now.
 SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="kobuki*", MODE:="0666", GROUP:="dialout", SYMLINK+="kobuki"
@@ -302,25 +294,25 @@ sudo touch rplidar.rules && sudo gedit rplidar.rules
 ```
 
 内容如下：
-```
+```bash
 KERNEL=="ttyUSB*", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", MODE:="0666", GROUP:="dialout",  SYMLINK+="rplidar"  
 ```
 
 增加对串口的默认访问权限
-```
+```bash
 sudo usermod -a -G dialout 用户名
 ```
 用户名为终端@之前的名字
 
 配置生效
 使udev配置生效
-```
+```bash
 sudo service udev reload
 sudo service udev restart
 ```
 
 检查rplidar的串口的权限：
-```
+```bash
 ls -l /dev |grep ttyUSB
 #添加写权限:(例如/dev/ttyUSB0）
 sudo chmod 666 /dev/ttyUSB0
@@ -451,7 +443,7 @@ turtlebot坐标系：右手原则， 前方（带碰撞挡板）X轴的正向，
 
 由于Rplidar的坐标系和turtlebot坐标系不一致，所以需要沿X轴做180度旋转。
 
-安装Rplidar的方法： 把Rplidar固定在turtlebot上方的最中心的位置，Rplidar三角形电机的朝向和turtlebot 前方碰撞挡板的中心位置一致，测量Rplidar和turtlebot底座的高度为20cm。
+安装Rplidar的方法： 把Rplidar固定在turtlebot上方的最前面的位置，Rplidar三角形电机的朝向和turtlebot 前方碰撞挡板的中心位置一致，测量Rplidar和turtlebot底座的高度为17.04cm。
 
 发布Rplidar和turtlebot的坐标关系有两种方式：
 在turtlebot_description/urdf/turtlebot_library.urdf.xacro的</robot>标签之前加入如下内容
@@ -484,44 +476,3 @@ turtlebot坐标系：右手原则， 前方（带碰撞挡板）X轴的正向，
 源码地址:[rplidar_ros](https://github.com/Slamtec/rplidar_ros)
 教程:[About RPLIDAR](https://github.com/robopeak/rplidar_ros/wiki)
 参考教程: [turtlebot2+激光雷达](https://blog.csdn.net/eaibot/article/details/51219032)
-
-### 语音控制
-##### 英文语音控制
-1.安装PocketSphinx语音识别包
-```bash
-sudo apt-get install gstreamer1.0-pocketsphinx
-sudo apt-get install ros-kinetic-audio-common
-sudo apt-get install libasound2
-sudo apt-get install gstreamer0.10-gconf
-sudo apt-get install libasound-dev
-sudo apt-get install python-pyaudio
-
-#安装pocketsphinx功能包
-mkdir -p ~/sound_ws/src 
-cd ~/sound_ws/src 
-git clone https://github.com/Pankaj-Baranwal/pocketsphinx.git
-cd ~/sound_ws && catkin_make
-
-#环境设置
-echo "source ~/sound_ws/devel/setup.bash" >> ~/.bashrc 
-#使环境生效
-source ~/.bashrc
-```
-测试
-```bash
-roslaunch turtlebot_gazebo turtlebot_world.launch
-
-```
-
-[Turtlebot Autonomous SLAM and Feature Tracking on ROS](https://github.com/lb5160482/Turtlebot-Autonomous-SLAM-and-Feature-Tracking-on-ROS)
-
-[ros_voice_system](https://github.com/stefantasy/ros_voice_system)
-
-
-教程:[pocketphinx中的“Okay Google”模式](https://medium.com/@PankajB96/okay-google-mode-in-pocketsphinx-6acdb5feafe9)
-
-[turtlebot入门-语音控制](https://www.ncnynl.com/archives/201609/870.html)
-[PocketSphinx语音识别和turtlebot的语音控制--18](https://www.cnblogs.com/zxouxuewei/p/5273178.html)
-[Turtlebot语音遥操作](https://edu.gaitech.hk/turtlebot/speech-doc.html)
-
-##### 中文语音控制
