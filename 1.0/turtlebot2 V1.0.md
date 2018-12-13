@@ -24,7 +24,6 @@ sudo apt-get update
 sudo apt-get install build-essential g++
 sudo apt-get install ros-kinetic-librealsense
 sudo apt-get install ros-kinetic-realsense-camera
-###############################################################################
 ```
 
 ```bash
@@ -39,7 +38,6 @@ ros-kinetic-turtlebot-interactions \
 ros-kinetic-turtlebot-msgs \
 ros-kinetic-turtlebot-navigation \
 ros-kinetic-turtlebot-rapps
-###############################################################################
 ```
 
 ##### kobuki底盘控制
