@@ -141,27 +141,29 @@ rosrun kinect2_bridge kinect2_bridge _fps_limit:=2
 
 ###标定彩色摄像头：
 #记录彩色摄像机的图像
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 record color
+rosrun kinect2_calibration kinect2_calibration chess9x11x0.02 record color
 #校准内在函数
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 calibrate color
+rosrun kinect2_calibration kinect2_calibration chess9x11x0.02 calibrate color
 
 ####标定红外：
 #记录红外摄像机的图像
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 record ir
+rosrun kinect2_calibration kinect2_calibration chess9x11x0.02 record ir
 #校准红外摄像机的内在因素
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.03 calibrate ir
+rosrun kinect2_calibration kinect2_calibration chess9x11x0.02 calibrate ir
 
 ###帧同步标定：
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 record sync
+rosrun kinect2_calibration kinect2_calibration chess9x11x0.02 record sync
 #按几次空格键记录
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 calibrate sync
+rosrun kinect2_calibration kinect2_calibration chess9x11x0.02 calibrate sync
 
 ###深度标定：
 ####采集100张图
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 record depth
-rosrun kinect2_calibration kinect2_calibration chess5x7x0.02 calibrate depth
+rosrun kinect2_calibration kinect2_calibration chess9x11x0.02 record depth
+rosrun kinect2_calibration kinect2_calibration chess9x11x0.02 calibrate depth
 
 ```
+>说明:标定棋盘格尺寸为:9x7x0.025,7x5x0.03,11x9x0.02
+
 然后再把calib_color.yaml calib_ir.yaml calib_pose.yaml calib_depth.yaml拷贝到/home/robot/catkin_ws/src/iai_kinect2/kinect2_bridge/data/034011551247文件夹中
 
 教程链接;[kinect2标定 Ubuntu16.04 ROS kinetic](https://blog.csdn.net/qingdu007/article/details/79204115)
