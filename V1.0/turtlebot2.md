@@ -29,6 +29,7 @@ sudo apt-get install ros-kinetic-yujin-ocs
 sudo apt-get install ros-kinetic-bfl
 sudo apt-get install libasound2-dev 
 sudo apt-get install mplayer
+sudo apt-get install ros-kinetic-usb-cam
 
 #编译依赖
 rosdep where-defined bullet
@@ -56,6 +57,11 @@ cd ~/High-genius_ws && catkin_make
 #配置环境
 echo "source ~/High-genius_ws/devel/setup.bash" >> ~/.bashrc
 source ~/.bashrc
+
+sudo gedit ~/.mplayer/config
+
+#添加下面代码
+lirc=no
 ```
 
 ##### kobuki底盘控制
@@ -295,7 +301,7 @@ rostopic pub -r 0.1 /voiceWakeup std_msgs/String "你好,小谷机器人"
 ```bash
 roscore
 rosrun robot_voice tts_subscribe
-rostopic pub -r 0.1 /voiceWords std_msgs/String "你好,小谷机器人"
+rostopic pub /voiceWords std_msgs/String "你好,小谷机器人"
 ```
 
 智能语音助手
