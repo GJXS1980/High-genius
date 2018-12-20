@@ -21,7 +21,12 @@ sudo apt-get install ros-$ROS_DISTRO-ecl-exceptions \
                      ros-$ROS_DISTRO-moveit-* \
                      ros-$ROS_DISTRO-yujin-ocs \
                      ros-$ROS_DISTRO-bfl \
-                     ros-$ROS_DISTRO-usb-cam
+                     ros-$ROS_DISTRO-usb-cam \
+                     ros-$ROS_DISTRO-open-manipulator \
+                     ros-$ROS_DISTRO-dynamixel-workbench \
+                     ros-$ROS_DISTRO-dynamixel-sdk \
+                     ros-$ROS_DISTRO-realsense-camera \
+                     ros-$ROS_DISTRO-joy
 
 sudo apt-get install linux-headers-generic
 sudo apt-get install build-essential g++
@@ -49,7 +54,7 @@ sudo cp ~/High-genius_ws/src/TurtleBot-Tutorial/robot_voice/libs/x64/libmsc.so /
 
 #编译
 cd ~/High-genius_ws
-catkin_make -DCMAKE_BUILD_TYPE=Release
+catkin_make
 
 #配置环境
 echo "export High_genius_ws='$(pwd)'" >> ~/.bashrc
@@ -105,8 +110,8 @@ roslaunch turtlebot_teleop logitech.launch
 2.实体机器人建图:
 ```bash
 roslaunch turtlebot_bringup minimal.launch
-roslaunch turtlebot_slam kinect2_gmapping.launch
-roslaunch turtlebot_slam kinect2_gmapping_rviz_view.launch
+roslaunch kinect2_slam kinect2_gmapping.launch
+roslaunch kinect2_slam kinect2_gmapping_rviz_view.launch
 roslaunch turtlebot_teleop logitech.launch
 ```
 
