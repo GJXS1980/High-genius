@@ -48,10 +48,13 @@ git clone https://github.com/GJXS1980/TurtleBot-Tutorial.git
 sudo cp ~/High-genius_ws/src/TurtleBot-Tutorial/robot_voice/libs/x64/libmsc.so /usr/lib/libmsc.so
 
 #编译
-cd ~/High-genius_ws && catkin_make
+cd ~/High-genius_ws
+catkin_make -DCMAKE_BUILD_TYPE=Release
 
 #配置环境
-echo "source ~/High-genius_ws/devel/setup.bash" >> ~/.bashrc && source ~/.bashrc
+echo "export High_genius_ws='$(pwd)'" >> ~/.bashrc
+echo "source $(pwd)/devel/setup.bash" >> ~/.bashrc
+bash
 
 sudo gedit ~/.mplayer/config
 #添加下面代码
