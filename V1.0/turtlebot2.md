@@ -1,6 +1,6 @@
 ## turtlebot2
 ##### kinect V2驱动安装
-链接:[ubuntu16.04安装kinect驱动](https://www.gjxslisa.club/2018/07/18/Kinect-driver/)
+链接:[ubuntu16.04安装kinect驱动](https://www.gjxslisa.club/2018/07/18/Kinect-driver/) <br>
 启动kinect
 ```bash
 roslaunch kinect2_bridge kinect2_bridge.launch
@@ -10,26 +10,23 @@ rosrun kinect2_viewer kinect2_viewer
 ##### kobuki依赖:
 ```bash
 #安装依赖
-sudo apt-get install ros-kinetic-ecl-exceptions
-sudo apt-get install ros-kinetic-ecl-threads
-sudo apt-get install ros-kinetic-ecl-geometry
-sudo apt-get install ros-kinetic-ecl-streams
-sudo apt-get install ros-kinetic-ecl-streams
-sudo apt-get install ros-kinetic-realsense-camera
-sudo apt-get install ros-kinetic-librealsense
+sudo apt-get install ros-$ROS_DISTRO-ecl-exceptions \
+                     ros-$ROS_DISTRO-ecl-threads \
+                     ros-$ROS_DISTRO-ecl-geometry \
+                     ros-$ROS_DISTRO-ecl-streams \
+                     ros-$ROS_DISTRO-librealsense \
+                     ros-$ROS_DISTRO-gazebo-ros-control \
+                     ros-$ROS_DISTRO-kobuki-core \
+                     ros-$ROS_DISTRO-linux-peripheral-interfaces \
+                     ros-$ROS_DISTRO-moveit-* \
+                     ros-$ROS_DISTRO-yujin-ocs \
+                     ros-$ROS_DISTRO-bfl \
+                     ros-$ROS_DISTRO-usb-cam
+
 sudo apt-get install linux-headers-generic
 sudo apt-get install build-essential g++
-sudo apt-get install ros-kinetic-librealsense
-sudo apt-get install ros-kinetic-realsense-camera
-sudo apt-get install ros-kinetic-gazebo-ros-control
-sudo apt-get install ros-kinetic-kobuki-core
-sudo apt-get install ros-kinetic-linux-peripheral-interfaces
-sudo apt-get install ros-kinetic-moveit-*
-sudo apt-get install ros-kinetic-yujin-ocs
-sudo apt-get install ros-kinetic-bfl
 sudo apt-get install libasound2-dev 
 sudo apt-get install mplayer
-sudo apt-get install ros-kinetic-usb-cam
 
 #编译依赖
 rosdep where-defined bullet
@@ -46,8 +43,7 @@ sudo apt-get install libsdl-image1.2-dev
 #安装功能包
 ```bash
 #创建文件夹
-mkdir -p ~/High-genius_ws/src
-cd ~/High-genius_ws/src
+mkdir -p ~/High-genius_ws/src && cd ~/High-genius_ws/src
 git clone https://github.com/GJXS1980/TurtleBot-Tutorial.git
 sudo cp ~/High-genius_ws/src/TurtleBot-Tutorial/robot_voice/libs/x64/libmsc.so /usr/lib/libmsc.so
 
@@ -55,11 +51,9 @@ sudo cp ~/High-genius_ws/src/TurtleBot-Tutorial/robot_voice/libs/x64/libmsc.so /
 cd ~/High-genius_ws && catkin_make
 
 #配置环境
-echo "source ~/High-genius_ws/devel/setup.bash" >> ~/.bashrc
-source ~/.bashrc
+echo "source ~/High-genius_ws/devel/setup.bash" >> ~/.bashrc && source ~/.bashrc
 
 sudo gedit ~/.mplayer/config
-
 #添加下面代码
 lirc=no
 ```
@@ -76,7 +70,7 @@ roslaunch kobuki_keyop keyop.launch --screen
 罗技手柄连接:
 驱动安装:
 ```bash
-sudo apt-get install ros-kinetic-joystick-drivers
+sudo apt-get install ros-$ROS_DISTRO-joystick-drivers
 rosdep install joy
 rosmake joy
 
@@ -193,10 +187,10 @@ rosrun rplidar_ros rplidarNodeClient
 ```bash
 roslaunch turtlebot_navigation gmapping_demo.launch
 
-#启动下面的任意一个
+#启动rviz
 roslaunch turtlebot_rviz_launchers view_navigation.launch
-roslaunch turtlebot_slam kinect2_gmapping_rviz_view.launch
 
+#手柄控制
 roslaunch turtlebot_teleop logitech.launch
 ```
 
